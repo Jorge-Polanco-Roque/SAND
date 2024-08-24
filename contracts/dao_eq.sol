@@ -6,33 +6,37 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract AdvancedDAO is ERC20 {
 
     struct Proposal {
-        string description;
-        uint256 deadline;
-        uint256 yesVotes;
-        uint256 noVotes;
-        bool executed;
-        mapping(address => bool) hasVoted;
+        string description;                     // Description of the proposal 
+        uint256 deadline;                       // Timestamp when voting ends
+        uint256 yesVotes;                       // New variable to track yes votes
+        uint256 noVotes;                        // New variable to track no votes              
+        bool executed;                          // Flag to track if the proposal has been executed
+        mapping(address => bool) hasVoted;      // Mapping to track voting status of each address
     }
 
-    Proposal[] public proposals;
-    uint256 public votingDuration = 1 weeks;
-    uint256 public quorumPercentage = 20;  // Quorum requirement: 20%
-    address public treasury;
+    Proposal[] public proposals;                // Array to store all proposals
+    uint256 public votingDuration = 1 weeks;    // Duration for voting on a proposal
+    uint256 public quorumPercentage = 20;       // Quorum requirement: 20%
+    address public treasury;                    // Address to hold the funds
 
-    event ProposalCreated(uint256 indexed proposalIndex, string description);
-    event ProposalExecuted(uint256 indexed proposalIndex, address indexed recipient, uint256 amount);
-    event VoteCast(address indexed voter, uint256 indexed proposalIndex, bool support);
+    event ProposalCreated(uint256 indexed proposalIndex, string description); // Event to log new proposals
+    event ProposalExecuted(uint256 indexed proposalIndex, address indexed recipient, uint256 amount); // Event to log executed proposals
+    event VoteCast(address indexed voter, uint256 indexed proposalIndex, bool support); // Event to log votes
 
+    // Constructor to initialize the ERC20 token and DAO contract
     constructor(
         string memory name,
         string memory symbol,
         uint8 decimals,
-        uint256 initialSupply
+        uint256 initialSupply,
+        address treasuryAddress
     ) 
         ERC20(name, symbol)
     {
         _mint(msg.sender, initialSupply * 10 ** uint256(decimals));
-        treasury = address(this);  // DAO itself holds the funds
+        //treasury = address(this);  // DAO itself holds the funds
+        treasury = treasuryAddress;  // Set the treasury to the specified address
+
     }
 
     // Function to create a new proposal, accessible by any token holder
@@ -53,6 +57,7 @@ contract AdvancedDAO is ERC20 {
 
         proposal.hasVoted[msg.sender] = true;
 
+        // Update the vote count based on the voter's choice
         uint256 votingPower = balanceOf(msg.sender);
         if (support) {
             proposal.yesVotes += votingPower;
