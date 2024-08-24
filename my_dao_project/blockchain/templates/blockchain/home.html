@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAO Contract Information</title>
+</head>
+<body>
+    <h1>DAO Contract Information</h1>
+    
+    <form action="{% url 'get_dao_info' %}" method="get">
+        <button type="submit">Get DAO Info</button>
+    </form>
+
+    <h2>Proposals</h2>
+    
+    <form action="{% url 'get_all_proposals' %}" method="get">
+        <button type="submit">Get All Proposals</button>
+    </form>
+
+    <h2>Voting Parameters</h2>
+    
+    <form action="{% url 'get_voting_params' %}" method="get">
+        <button type="submit">Get Voting Params</button>
+    </form>
+    
+</body>
+</html>
