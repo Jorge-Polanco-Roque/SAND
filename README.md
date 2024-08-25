@@ -1,4 +1,5 @@
 # SAND
 Coding a DAO enterprise
 
-**JP**: 'Roque' Branch
+**Smart Contracts**: 'Roque' Branch
+**Proyecto Página**: 'SAND' Branch
