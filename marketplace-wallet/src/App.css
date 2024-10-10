@@ -1,0 +1,46 @@
+.assets-list {
+  list-style: none;
+  padding: 0;
+}
+
+.asset-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.1em;
+}
+
+.nft-info {
+  margin-top: 30px;
+}
+
+.nfts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.nft-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.nft-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.nft-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.nft-description {
+  font-size: 0.9em;
+  color: #666;
+}
